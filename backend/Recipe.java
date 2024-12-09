@@ -3,7 +3,8 @@ package backend;
 import java.util.Date;
 
 public class Recipe {
-    private int id;
+	private static int idCounter = 0; // static variable to keep track of ids
+    private int id; // instance variable for the unique id of each Recipe object
     private String recipeName;
     private String totalCookTime;
     private int rating;
@@ -12,22 +13,23 @@ public class Recipe {
     private String notes;
     private Date date;
 
-    public Recipe(int id, String recipeName, String totalCookTime, int rating, String ingredients, String steps, String notes, Date date) {
-        this.id = id;
+    public Recipe(String recipeName, String totalCookTime, int rating, String ingredients, String steps, String notes) {
+        this.id = idCounter++; // assigns this.id the current value of idCounter, then increments idCounter by 1
         this.recipeName = recipeName;
         this.totalCookTime = totalCookTime;
         this.rating = rating;
         this.ingredients = ingredients;
         this.steps = steps;
         this.notes = notes;
-        this.date = date;
+        this.date = new Date(); // assign current date and time
     }
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	// id should not be changed after it is given
+	// public void setId(int id) {
 		this.id = id;
 	}
 
