@@ -10,7 +10,8 @@ public class Frontend extends JFrame {
     private JButton newRecipeBtn;
     private JButton saveBtn;
     private JButton deleteBtn;
-    private JComboBox<Integer> ratingBox;
+    private JButton upVoteBtn;
+    private JButton downVoteBtn;
     private JPanel recipeForm;
     private JTextField recipeNameField;
     private JTextField recipeCookTimeField;
@@ -32,7 +33,8 @@ public class Frontend extends JFrame {
         newRecipeBtn = new JButton("New Recipe");
         saveBtn = new JButton("Save");
         deleteBtn = new JButton("Delete");
-        ratingBox = new JComboBox<>(new Integer[]{null, 1, 2, 3, 4, 5});
+        upVoteBtn = new JButton("Up Vote");
+        downVoteBtn = new JButton("Down Vote");
         recipeForm = new JPanel(new GridLayout(6, 2));
         recipeNameField = new JTextField(20);
         recipeCookTimeField = new JTextField(20);
@@ -51,6 +53,8 @@ public class Frontend extends JFrame {
         buttonPanel.add(newRecipeBtn);
         buttonPanel.add(saveBtn);
         buttonPanel.add(deleteBtn);
+        buttonPanel.add(upVoteBtn);
+        buttonPanel.add(downVoteBtn);
         // main recipes container
         contentPanel.setLayout(new BorderLayout());
         contentPanel.add(searchPanel, BorderLayout.NORTH); // 1: search bar
@@ -68,7 +72,6 @@ public class Frontend extends JFrame {
         recipeForm.add(new JLabel("Notes:"));
         recipeForm.add(recipeNotesField);
         recipeForm.add(new JLabel("Rating:"));
-        recipeForm.add(ratingBox);
         // add containers to frame
         add(contentPanel, BorderLayout.CENTER);
         add(recipeForm, BorderLayout.SOUTH);
