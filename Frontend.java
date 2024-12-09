@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 
 public class Frontend extends JFrame {
@@ -15,9 +17,9 @@ public class Frontend extends JFrame {
     private JPanel recipeForm;
     private JTextField recipeNameField;
     private JTextField recipeCookTimeField;
-    private JTextField recipeIngredientsField;
-    private JTextField recipeStepsField;
-    private JTextField recipeNotesField;
+    private JTextArea recipeIngredientsField;
+    private JTextArea recipeStepsField;
+    private JTextArea recipeNotesField;
 
     public Frontend() {
         setTitle("Recipe Manager");
@@ -35,12 +37,13 @@ public class Frontend extends JFrame {
         deleteBtn = new JButton("Delete");
         upVoteBtn = new JButton("Up Vote");
         downVoteBtn = new JButton("Down Vote");
-        recipeForm = new JPanel(new GridLayout(6, 2));
+        recipeForm = new JPanel();
+        recipeForm.setLayout(new BoxLayout(recipeForm, BoxLayout.Y_AXIS));
         recipeNameField = new JTextField(20);
         recipeCookTimeField = new JTextField(20);
-        recipeIngredientsField = new JTextField(20);
-        recipeStepsField = new JTextField(20);
-        recipeNotesField = new JTextField(20);
+        recipeIngredientsField = new JTextArea(2, 20);
+        recipeStepsField = new JTextArea(2, 20);
+        recipeNotesField = new JTextArea(2, 20);
 
         // add components
         setLayout(new BorderLayout());
@@ -61,17 +64,30 @@ public class Frontend extends JFrame {
         contentPanel.add(new JScrollPane(recipeList), BorderLayout.CENTER); // 2: recipes
         contentPanel.add(buttonPanel, BorderLayout.SOUTH); // 3: buttons
         // recipe form
-        recipeForm.add(new JLabel("Name:"));
+        JLabel nameLabel = new JLabel("Name:");
+        nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        recipeForm.add(nameLabel);
         recipeForm.add(recipeNameField);
-        recipeForm.add(new JLabel("Cook Time:"));
+        JLabel cookTimeLabel = new JLabel("Cook Time:");
+        cookTimeLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        recipeForm.add(cookTimeLabel);
         recipeForm.add(recipeCookTimeField);
-        recipeForm.add(new JLabel("Ingredients:"));
-        recipeForm.add(recipeIngredientsField);
-        recipeForm.add(new JLabel("Steps:"));
-        recipeForm.add(recipeStepsField);
-        recipeForm.add(new JLabel("Notes:"));
+        JLabel ingredientsLabel = new JLabel("Ingredients:");
+        ingredientsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        recipeForm.add(ingredientsLabel);
+        recipeForm.add(new JScrollPane(recipeIngredientsField)); // Add JScrollPane for JTextArea
+        JLabel stepsLabel = new JLabel("Steps:");
+        stepsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        recipeForm.add(stepsLabel);
+        recipeForm.add(new JScrollPane(recipeStepsField)); // Add JScrollPane for JTextArea
+        JLabel notesLabel = new JLabel("Notes:");
+        notesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        recipeForm.add(notesLabel);
         recipeForm.add(recipeNotesField);
-        recipeForm.add(new JLabel("Rating:"));
+
+        // add borders to both containers
+        contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        recipeForm.setBorder(new EmptyBorder(10, 10, 10, 10));
         // add containers to frame
         add(contentPanel, BorderLayout.CENTER);
         add(recipeForm, BorderLayout.SOUTH);
