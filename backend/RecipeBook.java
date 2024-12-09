@@ -16,7 +16,7 @@ public class RecipeBook {
     // Add a recipe to the book
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
-        // count++; //do you add count here or in the controller?
+        count++;
     }
 
     // Delete a recipe by ID
