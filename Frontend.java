@@ -41,9 +41,9 @@ public class Frontend extends JFrame {
         recipeForm.setLayout(new BoxLayout(recipeForm, BoxLayout.Y_AXIS));
         recipeNameField = new JTextField(20);
         recipeCookTimeField = new JTextField(20);
-        recipeIngredientsField = new JTextArea(2, 20);
-        recipeStepsField = new JTextArea(2, 20);
-        recipeNotesField = new JTextArea(2, 20);
+        recipeIngredientsField = new JTextArea(3, 20);
+        recipeStepsField = new JTextArea(3, 20);
+        recipeNotesField = new JTextArea(3, 20);
 
         // add components
         setLayout(new BorderLayout());
@@ -75,15 +75,15 @@ public class Frontend extends JFrame {
         JLabel ingredientsLabel = new JLabel("Ingredients:");
         ingredientsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         recipeForm.add(ingredientsLabel);
-        recipeForm.add(new JScrollPane(recipeIngredientsField)); // Add JScrollPane for JTextArea
+        recipeForm.add(new JScrollPane(recipeIngredientsField));
         JLabel stepsLabel = new JLabel("Steps:");
         stepsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         recipeForm.add(stepsLabel);
-        recipeForm.add(new JScrollPane(recipeStepsField)); // Add JScrollPane for JTextArea
+        recipeForm.add(new JScrollPane(recipeStepsField));
         JLabel notesLabel = new JLabel("Notes:");
         notesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         recipeForm.add(notesLabel);
-        recipeForm.add(recipeNotesField);
+        recipeForm.add(new JScrollPane(recipeNotesField));
 
         // add borders to both containers
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
