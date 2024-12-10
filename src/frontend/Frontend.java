@@ -171,10 +171,22 @@ public class Frontend extends JFrame {
 
     private void upVoteBtnClicked() {
         System.out.println("Upvote button clicked");
+        // get curr rating
+        int currRating = Integer.parseInt(ratingLabel.getText());
+        if (currRating < 5) {
+            currRating++;
+        }
+        ratingLabel.setText(String.valueOf(currRating));
     }
 
     private void downVoteBtnClicked() {
         System.out.println("Downvote button clicked");
+        // get curr rating
+        int currRating = Integer.parseInt(ratingLabel.getText());
+        if (currRating > 1) {
+            currRating--;
+        }
+        ratingLabel.setText(String.valueOf(currRating));
     }
 
     public static void main(String[] args) {
