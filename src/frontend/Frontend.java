@@ -5,6 +5,8 @@ import controller.Controller;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Frontend extends JFrame {
     private Controller controller;
@@ -101,6 +103,71 @@ public class Frontend extends JFrame {
         // add containers to frame
         add(contentPanel, BorderLayout.CENTER);
         add(recipeForm, BorderLayout.SOUTH);
+
+        // button click: event listener methods
+        searchBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchBtnClicked();
+            }
+        });
+        newRecipeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newBtnClicked();
+            }
+        });
+        saveBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveBtnClicked();
+            }
+        });
+        deleteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteBtnClicked();
+            }
+        });
+        upVoteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                upVoteBtnClicked();
+            }
+        });
+        downVoteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                downVoteBtnClicked();
+            }
+        });
+    }
+
+    private void displayRecipes() {
+    }
+
+    private void searchBtnClicked() {
+        System.out.println("Search button clicked");
+    }
+
+    private void newBtnClicked() {
+        System.out.println("New button clicked");
+    }
+
+    private void saveBtnClicked() {
+        System.out.println("Save button clicked");
+    }
+
+    private void deleteBtnClicked() {
+        System.out.println("Delete button clicked");
+    }
+
+    private void upVoteBtnClicked() {
+        System.out.println("Upvote button clicked");
+    }
+
+    private void downVoteBtnClicked() {
+        System.out.println("Downvote button clicked");
     }
 
     public static void main(String[] args) {
