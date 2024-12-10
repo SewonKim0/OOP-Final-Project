@@ -2,8 +2,7 @@ package backend;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RecipeBook {
     private ArrayList<Recipe> recipes;
@@ -18,6 +17,26 @@ public class RecipeBook {
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
         count++;
+    }
+
+    // Update a recipe in the book
+    public void updateRecipe(int id, String name, String cookTime, String ingredients, String steps, String notes, int rating) {
+        Recipe toUpdate = null;
+        for (Recipe r : recipes) {
+            if (r.getId() == id) {
+                toUpdate = r;
+                break;
+            }
+        }
+        if (toUpdate != null) {
+            toUpdate.setRecipeName(name);
+            toUpdate.setTotalCookTime(cookTime);
+            toUpdate.setIngredients(ingredients);
+            toUpdate.setSteps(steps);
+            toUpdate.setNotes(notes);
+            toUpdate.setRating(rating);
+            toUpdate.setDate(new Date());
+        }
     }
 
     // Delete a recipe by ID
@@ -39,16 +58,14 @@ public class RecipeBook {
 
     // Convert RecipeBook to JSON
     public String toJson() {
-//        Gson gson = new Gson();
-//        return gson.toJson(this);
-        return "";
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 
     // Convert JSON to RecipeBook
     public static RecipeBook fromJson(String jsonStr) {
-//        Gson gson = new Gson();
-//        return gson.fromJson(jsonStr, RecipeBook.class);
-        return new RecipeBook();
+        Gson gson = new Gson();
+        return gson.fromJson(jsonStr, RecipeBook.class);
     }
 
 

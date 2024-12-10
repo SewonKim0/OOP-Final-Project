@@ -24,6 +24,18 @@ public class Recipe {
         this.date = new Date(); // assign current date and time
     }
 
+	// default constructor
+	public Recipe() {
+		this.id = idCounter++;
+		this.recipeName = "";
+		this.totalCookTime = "";
+		this.rating = 3;
+		this.ingredients = "";
+		this.steps = "";
+		this.notes = "";
+		this.date = new Date();
+	}
+
 	public int getId() {
 		return id;
 	}
