@@ -1,10 +1,13 @@
+package frontend;
+
+import controller.Controller;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 
 public class Frontend extends JFrame {
-    // private Controller controller;
+    private Controller controller;
     private JPanel contentPanel;
     private JTextField searchField;
     private JButton searchBtn;
@@ -22,6 +25,9 @@ public class Frontend extends JFrame {
     private JTextArea recipeNotesField;
 
     public Frontend() {
+        // get controller instance
+        controller = Controller.getInstance();
+
         setTitle("Recipe Manager");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +37,11 @@ public class Frontend extends JFrame {
         contentPanel = new JPanel();
         searchField = new JTextField(20);
         searchBtn = new JButton("Search");
-        recipeList = new JTable();
+
+        // recipe
+        RecipeTableModel tableModel = new RecipeTableModel(controller.getRecipes());
+        recipeList = new JTable(tableModel);
+
         newRecipeBtn = new JButton("New Recipe");
         saveBtn = new JButton("Save");
         deleteBtn = new JButton("Delete");

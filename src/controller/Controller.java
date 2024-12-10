@@ -1,5 +1,8 @@
 package controller;
-import backend.*;
+
+import backend.Backend;
+import backend.Recipe;
+import backend.RecipeBook;
 
 import java.io.IOException;
 import java.util.*;
@@ -11,9 +14,9 @@ public class Controller {
     private Controller() {
         fileSystem = new Backend("../backend/recipe_book.json");
         try {
-            recipeBook = fileSystem.load()
+            recipeBook = fileSystem.load();
         }
-        catch (IOException) {
+        catch (IOException ex) {
             recipeBook = new RecipeBook();
         }
     }
@@ -21,14 +24,14 @@ public class Controller {
     // singleton pattern
     // this class can only have one instance
     private static Controller instance = null;
-    public static controller.Controller getInstance() {
+    public static Controller getInstance() {
         if (instance == null) {
             instance = new Controller();
         }
         return instance;
     }
 
-    public List<Recipe> getRecipes() {
+    public ArrayList<Recipe> getRecipes() {
         return recipeBook.getRecipes();
     }
 

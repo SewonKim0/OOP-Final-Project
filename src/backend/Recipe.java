@@ -28,10 +28,7 @@ public class Recipe {
 		return id;
 	}
 
-	// id should not be changed after it is given
-	// public void setId(int id) {
-		this.id = id;
-	}
+	// id should not be changed after it is given, no set method
 
 	public String getRecipeName() {
 		return recipeName;
