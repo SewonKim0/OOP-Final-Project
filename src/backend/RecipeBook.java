@@ -21,13 +21,7 @@ public class RecipeBook {
 
     // Update a recipe in the book
     public void updateRecipe(int id, String name, String cookTime, String ingredients, String steps, String notes, int rating) {
-        Recipe toUpdate = null;
-        for (Recipe r : recipes) {
-            if (r.getId() == id) {
-                toUpdate = r;
-                break;
-            }
-        }
+        Recipe toUpdate = getRecipeById(id);
         if (toUpdate != null) {
             toUpdate.setRecipeName(name);
             toUpdate.setTotalCookTime(cookTime);
@@ -42,6 +36,20 @@ public class RecipeBook {
     // Delete a recipe by ID
     public void deleteRecipe(int id) {
         recipes.removeIf(recipe -> recipe.getId() == id);
+    }
+
+    // Upvote a recipe by ID
+    public void upvoteRecipe(int id) {
+        Recipe r = getRecipeById(id);
+        int currentRating = r.getRating();
+        r.setRating(currentRating+1);
+    }
+
+    // Downvote a recipe by ID
+    public void downvoteRecipe(int id) {
+        Recipe r = getRecipeById(id);
+        int currentRating = r.getRating();
+        r.setRating(currentRating-1);
     }
 
     // Search for a recipe by name or ingredients
@@ -70,10 +78,22 @@ public class RecipeBook {
 
 
     // Getters
+    // Allow user to search for Recipe object by id field with for loop
+    public Recipe getRecipeById(int id) {
+        for (Recipe r : recipes) {
+            if (r.getId() == id) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+    // Return ArrayList of all Recipe objects
     public ArrayList<Recipe> getRecipes() {
         return recipes;
     }
 
+    // Return number of Recipe objects in RecipeBook
     public int getCount() {
         return count;
     }
