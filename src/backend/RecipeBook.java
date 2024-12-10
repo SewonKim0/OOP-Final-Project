@@ -1,11 +1,12 @@
 package backend;
 
+//import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.Gson; // Assuming Gson library is used for JSON handling
 
 public class RecipeBook {
-    private List<Recipe> recipes;
+    private ArrayList<Recipe> recipes;
     private int count;
 
     public RecipeBook() {
@@ -25,8 +26,8 @@ public class RecipeBook {
     }
 
     // Search for a recipe by name or ingredients
-    public List<Recipe> searchForRecipe(String query) {
-        List<Recipe> result = new ArrayList<>();
+    public ArrayList<Recipe> searchForRecipe(String query) {
+        ArrayList<Recipe> result = new ArrayList<>();
         for (Recipe recipe : recipes) {
             if (recipe.getRecipeName().toLowerCase().contains(query.toLowerCase()) ||
                 recipe.getIngredients().toLowerCase().contains(query.toLowerCase())) {
@@ -38,19 +39,21 @@ public class RecipeBook {
 
     // Convert RecipeBook to JSON
     public String toJson() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
+//        Gson gson = new Gson();
+//        return gson.toJson(this);
+        return "";
     }
 
     // Convert JSON to RecipeBook
     public static RecipeBook fromJson(String jsonStr) {
-        Gson gson = new Gson();
-        return gson.fromJson(jsonStr, RecipeBook.class);
+//        Gson gson = new Gson();
+//        return gson.fromJson(jsonStr, RecipeBook.class);
+        return new RecipeBook();
     }
 
 
     // Getters
-    public List<Recipe> getRecipes() {
+    public ArrayList<Recipe> getRecipes() {
         return recipes;
     }
 
