@@ -13,12 +13,7 @@ public class Controller {
 
     private Controller() {
         fileSystem = new Backend("../backend/recipe_book.json");
-        try {
-            recipeBook = fileSystem.load();
-        }
-        catch (IOException ex) {
-            recipeBook = new RecipeBook();
-        }
+        recipeBook = null; // read from disk will take a long time, only call when necessary
     }
 
     // singleton pattern
@@ -32,19 +27,45 @@ public class Controller {
     }
 
     public ArrayList<Recipe> getRecipes() {
+        if (recipeBook == null) {
+            recipeBook = readRecipeBookFromFile();
+        }
         return recipeBook.getRecipes();
     }
 
-    public void saveRecipe(String name, String cookTime, String ingredients, String steps, String notes, int rating) {
-        Recipe r = new Recipe(name, cookTime, rating, ingredients, steps, notes);
+    // called by Frontend to add a blank new recipe
+    public void addNewRecipe() throws IOException {
+        Recipe r = new Recipe();
         recipeBook.addRecipe(r);
+        writeRecipeBookToFile();
+    }
+
+    public void updateRecipe(int id, String name, String cookTime, String ingredients, String steps, String notes, int rating) throws IOException {
+        recipeBook.updateRecipe(id, name, cookTime, ingredients, steps, notes, rating);
+        writeRecipeBookToFile();
     }
 
     public List<Recipe> searchRecipe(String anyString) {
         return recipeBook.searchForRecipe(anyString);
     }
 
-    public void deleteRecipe(int id) {
+    public void deleteRecipe(int id) throws IOException {
         recipeBook.deleteRecipe(id);
+        writeRecipeBookToFile();
+    }
+
+    public void writeRecipeBookToFile() throws IOException {
+        fileSystem.save(recipeBook.toJson());
+    }
+
+    public RecipeBook readRecipeBookFromFile() {
+        RecipeBook temp = null;
+        try {
+            temp = RecipeBook.fromJson(fileSystem.load());
+        }
+        catch (IOException ex) {
+            temp = new RecipeBook();
+        }
+        return temp;
     }
 }
