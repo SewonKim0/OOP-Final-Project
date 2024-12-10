@@ -19,6 +19,7 @@ public class Frontend extends JFrame {
     private JButton deleteBtn;
     private JButton upVoteBtn;
     private JButton downVoteBtn;
+    private JLabel ratingLabel;
     private JPanel recipeForm;
     private JTextField recipeNameField;
     private JTextField recipeCookTimeField;
@@ -49,6 +50,7 @@ public class Frontend extends JFrame {
         deleteBtn = new JButton("Delete");
         upVoteBtn = new JButton("Up Vote");
         downVoteBtn = new JButton("Down Vote");
+        ratingLabel = new JLabel("3");
         recipeForm = new JPanel();
         recipeForm.setLayout(new BoxLayout(recipeForm, BoxLayout.Y_AXIS));
         recipeNameField = new JTextField(20);
@@ -76,6 +78,11 @@ public class Frontend extends JFrame {
         contentPanel.add(new JScrollPane(recipeList), BorderLayout.CENTER); // 2: recipes
         contentPanel.add(buttonPanel, BorderLayout.SOUTH); // 3: buttons
         // recipe form
+        JLabel ratingLabelText = new JLabel("Rating: ");
+        JPanel horizontalPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        horizontalPanel.add(ratingLabelText);
+        horizontalPanel.add(ratingLabel);
+        recipeForm.add(horizontalPanel);
         JLabel nameLabel = new JLabel("Name:");
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         recipeForm.add(nameLabel);
