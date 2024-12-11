@@ -245,6 +245,10 @@ public class Frontend extends JFrame {
 
         // get recipe id
         int selectedRow = recipeList.getSelectedRow();
+        if (selectedRow == -1) {
+            System.out.println("No recipe selected to save");
+            return;
+        }
         List<Recipe> recipes = ((RecipeTableModel) recipeList.getModel()).getRecipes();
         int id = recipes.get(selectedRow).getId();
 
@@ -262,6 +266,10 @@ public class Frontend extends JFrame {
     private void deleteBtnClicked() {
         // get current selected recipe
         int selectedRow = recipeList.getSelectedRow();
+        if (selectedRow == -1) {
+            System.out.println("No recipe selected to delete");
+            return;
+        }
         List<Recipe> recipes = ((RecipeTableModel) recipeList.getModel()).getRecipes();
         int id = recipes.get(selectedRow).getId();
 
@@ -277,6 +285,13 @@ public class Frontend extends JFrame {
     }
 
     private void upVoteBtnClicked() {
+        // if no recipe selected: ignore
+        int selectedRow = recipeList.getSelectedRow();
+        if (selectedRow == -1) {
+            System.out.println("No recipe selected to rate");
+            return;
+        }
+
         // get curr rating
         int currRating = Integer.parseInt(ratingLabel.getText());
         if (currRating < 5) {
@@ -286,6 +301,13 @@ public class Frontend extends JFrame {
     }
 
     private void downVoteBtnClicked() {
+        // if no recipe selected: ignore
+        int selectedRow = recipeList.getSelectedRow();
+        if (selectedRow == -1) {
+            System.out.println("No recipe selected to rate");
+            return;
+        }
+
         // get curr rating
         int currRating = Integer.parseInt(ratingLabel.getText());
         if (currRating > 1) {
