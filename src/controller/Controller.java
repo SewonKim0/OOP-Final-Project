@@ -74,7 +74,7 @@ public class Controller {
     called by frontend UI when the "Search" button is pressed
     calls RecipeBook searchForRecipe() method
      */
-    public List<Recipe> searchRecipe(String anyString) {
+    public ArrayList<Recipe> searchRecipe(String anyString) {
         return recipeBook.searchForRecipe(anyString);
     }
 

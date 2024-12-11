@@ -199,7 +199,15 @@ public class Frontend extends JFrame {
     }
 
     private void searchBtnClicked() {
-        System.out.println("Search button clicked");
+        // get query
+        String query = searchField.getText();
+
+        // search
+        ArrayList<Recipe> searchResults = controller.searchRecipe(query);
+        
+        // display results
+        RecipeTableModel tableModel = new RecipeTableModel(searchResults);
+        recipeList.setModel(tableModel);
     }
 
     private void newBtnClicked() {
