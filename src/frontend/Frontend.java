@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.util.ArrayList;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -170,7 +171,16 @@ public class Frontend extends JFrame {
         });
     }
 
+    /**
+     * Display recipes in the JTable with the latest RecipeBook data
+     *  - called when the frontend is first loaded
+     *  - called when save button clicked
+     */
     private void displayRecipes() {
+        // get latest recipes
+        ArrayList<Recipe> recipes = controller.getRecipes();
+        RecipeTableModel tableModel = new RecipeTableModel(recipes);
+        recipeList.setModel(tableModel);
     }
 
     /**
@@ -229,6 +239,9 @@ public class Frontend extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // refresh table (with latest data)
+        displayRecipes();
     }
 
     private void deleteBtnClicked() {
