@@ -11,13 +11,7 @@ public class Backend {
     public Backend(String path) {
         this.currentPath = path;
     }
-    
-    // Save the RecipeBook to a file
-//    public void save(RecipeBook recipeBook) throws IOException {
-//        try (FileWriter writer = new FileWriter(currentPath)) {
-//            writer.write(recipeBook.toJson());
-//        }
-//    }
+
     public void save(String data) throws IOException {
         try (FileWriter writer = new FileWriter(currentPath)) {
             writer.write(data);

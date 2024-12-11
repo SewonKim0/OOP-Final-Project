@@ -20,7 +20,7 @@ public class Controller {
     private because of singleton pattern
      */
     private Controller() {
-        fileSystem = new Backend("../backend/recipe_book.json");
+        fileSystem = new Backend("src/backend/recipe_book.json");
         recipeBook = null; // read from disk will take a long time, only call when necessary
     }
 
