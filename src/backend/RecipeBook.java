@@ -7,15 +7,18 @@ import java.util.*;
 public class RecipeBook {
     private ArrayList<Recipe> recipes;
     private int count;
+    private int topId;
 
     public RecipeBook() {
         this.recipes = new ArrayList<>();
         this.count = 0;
+        topId = 0;
     }
 
     // Add a recipe to the book
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
+        topId = Math.max(topId, recipe.getId());
         count++;
     }
 
@@ -73,7 +76,9 @@ public class RecipeBook {
     // Convert JSON to RecipeBook
     public static RecipeBook fromJson(String jsonStr) {
         Gson gson = new Gson();
-        return gson.fromJson(jsonStr, RecipeBook.class);
+        RecipeBook r = gson.fromJson(jsonStr, RecipeBook.class);
+        Recipe.setIdCounter(r.topId+1);
+        return r;
     }
 
 
