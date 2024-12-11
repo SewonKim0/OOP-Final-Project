@@ -162,7 +162,7 @@ public class Frontend extends JFrame {
                     int selectedRow = recipeList.getSelectedRow();
                     if (selectedRow != -1) {
                         // get recipe list from
-                        List<Recipe> recipes = tableModel.getRecipes();
+                        List<Recipe> recipes = ((RecipeTableModel) recipeList.getModel()).getRecipes();
                         Recipe selectedRecipe = recipes.get(selectedRow);
                         recipeSelected(selectedRecipe);
                     }
