@@ -3,12 +3,12 @@ package frontend;
 import controller.Controller;
 import backend.Recipe;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.util.ArrayList;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -261,6 +261,9 @@ public class Frontend extends JFrame {
 
         // refresh table (with latest data)
         displayRecipes();
+
+        // confirm save
+        JOptionPane.showMessageDialog(this, "Recipe saved successfully!", "Save Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void deleteBtnClicked() {
@@ -282,6 +285,9 @@ public class Frontend extends JFrame {
 
         // refresh table (with latest data)
         displayRecipes();
+
+        // confirm delete
+        JOptionPane.showMessageDialog(this, "Recipe deleted successfully!", "Delete Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void upVoteBtnClicked() {
