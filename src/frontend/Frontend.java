@@ -179,6 +179,13 @@ public class Frontend extends JFrame {
      * @param recipe the selected recipe
      */
     private void recipeSelected(Recipe recipe) {
+        // populate recipe form
+        recipeNameField.setText(recipe.getRecipeName());
+        recipeCookTimeField.setText(recipe.getTotalCookTime());
+        recipeIngredientsField.setText(recipe.getIngredients());
+        recipeStepsField.setText(recipe.getSteps());
+        recipeNotesField.setText(recipe.getNotes());
+        ratingLabel.setText(String.valueOf(recipe.getRating()));
     }
 
     private void searchBtnClicked() {
@@ -210,6 +217,18 @@ public class Frontend extends JFrame {
         String steps = recipeStepsField.getText();
         String notes = recipeNotesField.getText();
         int rating = Integer.parseInt(ratingLabel.getText());
+
+        // get recipe id
+        int selectedRow = recipeList.getSelectedRow();
+        List<Recipe> recipes = ((RecipeTableModel) recipeList.getModel()).getRecipes();
+        int id = recipes.get(selectedRow).getId();
+
+        // update
+        try {
+            controller.updateRecipe(id, name, cookTime, ingredients, steps, notes, rating);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void deleteBtnClicked() {
