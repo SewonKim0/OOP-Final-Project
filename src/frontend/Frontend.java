@@ -1,6 +1,8 @@
 package frontend;
 
 import controller.Controller;
+import backend.Recipe;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -158,11 +160,30 @@ public class Frontend extends JFrame {
     }
 
     private void newBtnClicked() {
-        System.out.println("New button clicked");
+        // clear all fields in recipeForm
+        recipeNameField.setText("");
+        recipeCookTimeField.setText("");
+        recipeIngredientsField.setText("");
+        recipeStepsField.setText("");
+        recipeNotesField.setText("");
+        ratingLabel.setText("3");
+
+        // add new recipe to controller
+        try {
+            controller.addNewRecipe();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void saveBtnClicked() {
-        System.out.println("Save button clicked");
+        // update recipe
+        String name = recipeNameField.getText();
+        String cookTime = recipeCookTimeField.getText();
+        String ingredients = recipeIngredientsField.getText();
+        String steps = recipeStepsField.getText();
+        String notes = recipeNotesField.getText();
+        int rating = Integer.parseInt(ratingLabel.getText());
     }
 
     private void deleteBtnClicked() {
