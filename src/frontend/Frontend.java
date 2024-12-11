@@ -217,6 +217,13 @@ public class Frontend extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // update table
+        displayRecipes();
+
+        // select the last row (newly added recipe)
+        int lastRow = recipeList.getRowCount() - 1;
+        recipeList.setRowSelectionInterval(lastRow, lastRow);
     }
 
     private void saveBtnClicked() {
@@ -245,11 +252,9 @@ public class Frontend extends JFrame {
     }
 
     private void deleteBtnClicked() {
-        System.out.println("Delete button clicked");
     }
 
     private void upVoteBtnClicked() {
-        System.out.println("Upvote button clicked");
         // get curr rating
         int currRating = Integer.parseInt(ratingLabel.getText());
         if (currRating < 5) {
@@ -259,7 +264,6 @@ public class Frontend extends JFrame {
     }
 
     private void downVoteBtnClicked() {
-        System.out.println("Downvote button clicked");
         // get curr rating
         int currRating = Integer.parseInt(ratingLabel.getText());
         if (currRating > 1) {
