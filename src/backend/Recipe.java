@@ -100,4 +100,10 @@ public class Recipe {
 		this.date = date;
 	}
 
+	public String toString() {
+		return "Recipe [id=" + id + ", recipeName=" + recipeName + ", totalCookTime=" + totalCookTime + ", rating="
+				+ rating + ", ingredients=" + ingredients + ", steps=" + steps + ", notes=" + notes + ", date=" + date
+				+ "]";
+	}
+
 }

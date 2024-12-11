@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -150,9 +153,32 @@ public class Frontend extends JFrame {
                 downVoteBtnClicked();
             }
         });
+        // table entry selected event
+        recipeList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = recipeList.getSelectedRow();
+                    if (selectedRow != -1) {
+                        // get recipe list from
+                        List<Recipe> recipes = tableModel.getRecipes();
+                        Recipe selectedRecipe = recipes.get(selectedRow);
+                        recipeSelected(selectedRecipe);
+                    }
+                }
+            }
+        });
     }
 
     private void displayRecipes() {
+    }
+
+    /**
+     * Event handler for when a recipe is selected in the JTable
+     *   - populate the recipe form with the selected recipe's data
+     * @param recipe the selected recipe
+     */
+    private void recipeSelected(Recipe recipe) {
     }
 
     private void searchBtnClicked() {

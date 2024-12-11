@@ -12,6 +12,10 @@ public class RecipeTableModel extends AbstractTableModel {
         this.recipes = recipes;
     }
 
+    public ArrayList<Recipe> getRecipes() {
+        return recipes;
+    }
+
     @Override
     public int getRowCount() {
         return recipes.size();
