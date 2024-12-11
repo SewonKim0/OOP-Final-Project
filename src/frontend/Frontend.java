@@ -252,6 +252,20 @@ public class Frontend extends JFrame {
     }
 
     private void deleteBtnClicked() {
+        // get current selected recipe
+        int selectedRow = recipeList.getSelectedRow();
+        List<Recipe> recipes = ((RecipeTableModel) recipeList.getModel()).getRecipes();
+        int id = recipes.get(selectedRow).getId();
+
+        // delete
+        try {
+            controller.deleteRecipe(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // refresh table (with latest data)
+        displayRecipes();
     }
 
     private void upVoteBtnClicked() {
