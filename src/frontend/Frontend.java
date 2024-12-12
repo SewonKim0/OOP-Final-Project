@@ -5,6 +5,9 @@ import backend.Recipe;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -20,6 +23,7 @@ public class Frontend extends JFrame {
     private JTextField searchField;
     private JButton searchBtn;
     private JTable recipeList;
+    private RecipeTableModel tableModel;
     private JButton newRecipeBtn;
     private JButton saveBtn;
     private JButton deleteBtn;
@@ -49,8 +53,11 @@ public class Frontend extends JFrame {
         searchBtn = new JButton("Search");
 
         // recipe
-        RecipeTableModel tableModel = new RecipeTableModel(controller.getRecipes());
+        tableModel = new RecipeTableModel(controller.getRecipes());
+        // implement sort by column
         recipeList = new JTable(tableModel);
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(recipeList.getModel());
+        recipeList.setRowSorter(rowSorter);
 
         newRecipeBtn = new JButton("New Recipe");
         saveBtn = new JButton("Save");
@@ -181,8 +188,10 @@ public class Frontend extends JFrame {
     private void displayRecipes() {
         // get latest recipes
         ArrayList<Recipe> recipes = controller.getRecipes();
-        RecipeTableModel tableModel = new RecipeTableModel(recipes);
-        recipeList.setModel(tableModel);
+        tableModel.updateData(recipes);
+
+        // clear search field
+        searchField.setText("");
     }
 
     /**
@@ -210,8 +219,9 @@ public class Frontend extends JFrame {
         ArrayList<Recipe> searchResults = controller.searchRecipe(query);
         
         // display results
-        RecipeTableModel tableModel = new RecipeTableModel(searchResults);
-        recipeList.setModel(tableModel);
+        // RecipeTableModel tableModel = new RecipeTableModel(searchResults);
+        // recipeList.setModel(tableModel);
+        tableModel.updateData(searchResults);
     }
 
     private void newBtnClicked() {
