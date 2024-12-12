@@ -15,7 +15,6 @@ public class Recipe {
 
     public Recipe(String name, String cookTime, String ingredients, String steps, String notes, int rating) {
         this.id = idCounter++; // assigns this.id the current value of idCounter, then increments idCounter by 1
-        System.out.println(idCounter);
 		this.name = name;
         this.cookTime = cookTime;
         this.rating = rating;
@@ -28,7 +27,6 @@ public class Recipe {
 	// default constructor
 	public Recipe() {
 		this.id = idCounter++;
-		System.out.println(idCounter);
 		this.name = "";
 		this.cookTime = "";
 		this.rating = 3;

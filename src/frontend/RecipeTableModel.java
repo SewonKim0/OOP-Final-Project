@@ -46,4 +46,9 @@ public class RecipeTableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         return columnNames[columnIndex];
     }
+
+    public void updateData(ArrayList<Recipe> newRecipes) {
+        this.recipes = newRecipes;
+        fireTableDataChanged(); // Notify listeners that all data has changed
+    }
 }
