@@ -89,26 +89,6 @@ public class Controller {
     }
 
     /*
-    called by frontend UI when the "Up Vote" button is pressed
-    calls RecipeBook upvoteRecipe() method
-    saves to file system
-     */
-    public void upvoteRecipe(int id) throws IOException {
-        recipeBook.upvoteRecipe(id);
-        writeRecipeBookToFile();
-    }
-
-    /*
-    called by frontend UI when the "Down Vote" button is pressed
-    calls RecipeBook downvoteRecipe() method
-    saves to file system
-     */
-    public void downvoteRecipe(int id) throws IOException {
-        recipeBook.downvoteRecipe(id);
-        writeRecipeBookToFile();
-    }
-
-    /*
     save current version of RecipeBook class member variable to file system
      */
     public void writeRecipeBookToFile() throws IOException {

@@ -12,7 +12,7 @@ public class RecipeBook {
     public RecipeBook() {
         this.recipes = new ArrayList<>();
         this.count = 0;
-        topId = 0;
+        this.topId = 0;
     }
 
     // Add a recipe to the book
