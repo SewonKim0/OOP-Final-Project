@@ -18,7 +18,7 @@ public class Backend {
         }
     }
     
-	// Load the RecipeBook from a file
+	//Load the RecipeBook from a file
     public String load() throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(currentPath))) {
             StringBuilder jsonBuilder = new StringBuilder();

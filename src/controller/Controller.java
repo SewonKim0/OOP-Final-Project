@@ -54,8 +54,8 @@ public class Controller {
     creates a blank Recipe object and adds it to the RecipeBook
     saves to file system
      */
-    public void addNewRecipe() throws IOException {
-        Recipe r = new Recipe();
+    public void addNewRecipe(String name, String cookTime, String ingredients, String steps, String notes, int rating) throws IOException {
+        Recipe r = new Recipe(name, cookTime, ingredients, steps, notes, rating);
         recipeBook.addRecipe(r);
         writeRecipeBookToFile();
     }
@@ -127,5 +127,12 @@ public class Controller {
             temp = new RecipeBook();
         }
         return temp;
+    }
+
+    /*
+    validates if recipe being saved has required fields
+     */
+    public boolean validateRecipe(String name, String ingredients, String steps){
+        return !name.isEmpty() && !ingredients.isEmpty() && !steps.isEmpty();
     }
 }

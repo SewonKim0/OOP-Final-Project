@@ -5,19 +5,19 @@ import java.util.Date;
 public class Recipe {
 	protected static int idCounter = 0; // static variable to keep track of ids
     private int id; // instance variable for the unique id of each Recipe object
-    private String recipeName;
-    private String totalCookTime;
+    private String name;
+    private String cookTime;
     private int rating;
     private String ingredients;
     private String steps;
     private String notes;
     private Date date;
 
-    public Recipe(String recipeName, String totalCookTime, int rating, String ingredients, String steps, String notes) {
+    public Recipe(String name, String cookTime, String ingredients, String steps, String notes, int rating) {
         this.id = idCounter++; // assigns this.id the current value of idCounter, then increments idCounter by 1
         System.out.println(idCounter);
-		this.recipeName = recipeName;
-        this.totalCookTime = totalCookTime;
+		this.name = name;
+        this.cookTime = cookTime;
         this.rating = rating;
         this.ingredients = ingredients;
         this.steps = steps;
@@ -29,8 +29,8 @@ public class Recipe {
 	public Recipe() {
 		this.id = idCounter++;
 		System.out.println(idCounter);
-		this.recipeName = "";
-		this.totalCookTime = "";
+		this.name = "";
+		this.cookTime = "";
 		this.rating = 3;
 		this.ingredients = "";
 		this.steps = "";
@@ -49,20 +49,20 @@ public class Recipe {
 
 	protected static void setIdCounter(int newCount) { idCounter = newCount; }
 
-	public String getRecipeName() {
-		return recipeName;
+	public String getName() {
+		return name;
 	}
 
-	public void setRecipeName(String recipeName) {
-		this.recipeName = recipeName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getTotalCookTime() {
-		return totalCookTime;
+	public String getCookTime() {
+		return cookTime;
 	}
 
-	public void setTotalCookTime(String totalCookTime) {
-		this.totalCookTime = totalCookTime;
+	public void setCookTime(String totalCookTime) {
+		this.cookTime = cookTime;
 	}
 
 	public int getRating() {
@@ -108,7 +108,7 @@ public class Recipe {
 	}
 
 	public String toString() {
-		return "Recipe [id=" + id + ", recipeName=" + recipeName + ", totalCookTime=" + totalCookTime + ", rating="
+		return "Recipe [id=" + id + ", name=" + name + ", cookTime=" + cookTime + ", rating="
 				+ rating + ", ingredients=" + ingredients + ", steps=" + steps + ", notes=" + notes + ", date=" + date
 				+ "]";
 	}

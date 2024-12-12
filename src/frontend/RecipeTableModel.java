@@ -31,8 +31,8 @@ public class RecipeTableModel extends AbstractTableModel {
         Recipe recipe = recipes.get(rowIndex);
         switch (columnIndex) {
             case 0: return recipe.getId();
-            case 1: return recipe.getRecipeName();
-            case 2: return recipe.getTotalCookTime();
+            case 1: return recipe.getName();
+            case 2: return recipe.getCookTime();
             case 3: return recipe.getRating();
             case 4: return recipe.getIngredients();
             case 5: return recipe.getSteps();
