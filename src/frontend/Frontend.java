@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -48,8 +50,8 @@ public class Frontend extends JFrame {
         searchBtn = new JButton("Search");
 
         // recipe
-        RecipeTableModel tableModel = new RecipeTableModel(controller.getRecipes());
-        recipeList = new JTable(tableModel);
+        // RecipeTableModel tableModel = new RecipeTableModel(controller.getRecipes());
+        recipeList = displayRecipes(controller.getRecipes());
 
         newRecipeBtn = new JButton("New Recipe");
         saveBtn = new JButton("Save");
@@ -176,11 +178,15 @@ public class Frontend extends JFrame {
      *  - called when the frontend is first loaded
      *  - called when save button clicked
      */
-    private void displayRecipes() {
+    private JTable displayRecipes(ArrayList<Recipe> listOfRecipes) {
         // get latest recipes
-        ArrayList<Recipe> recipes = controller.getRecipes();
-        RecipeTableModel tableModel = new RecipeTableModel(recipes);
-        recipeList.setModel(tableModel);
+        RecipeTableModel tableModel = new RecipeTableModel(listOfRecipes);
+        JTable table = new JTable(tableModel);
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(rowSorter);
+        // recipeList.setModel(tableModel);
+        // recipeList = table;
+        return table;
     }
 
     /**
@@ -206,8 +212,9 @@ public class Frontend extends JFrame {
         ArrayList<Recipe> searchResults = controller.searchRecipe(query);
         
         // display results
-        RecipeTableModel tableModel = new RecipeTableModel(searchResults);
-        recipeList.setModel(tableModel);
+//        RecipeTableModel tableModel = new RecipeTableModel(searchResults);
+//        recipeList.setModel(tableModel);
+        recipeList = displayRecipes(searchResults);
     }
 
     private void newBtnClicked() {
@@ -227,7 +234,7 @@ public class Frontend extends JFrame {
         }
 
         // update table
-        displayRecipes();
+        displayRecipes(controller.getRecipes());
 
         // select the last row (newly added recipe)
         int lastRow = recipeList.getRowCount() - 1;
@@ -260,7 +267,7 @@ public class Frontend extends JFrame {
         }
 
         // refresh table (with latest data)
-        displayRecipes();
+        displayRecipes(controller.getRecipes());
 
         // confirm save
         JOptionPane.showMessageDialog(this, "Recipe saved successfully!", "Save Confirmation", JOptionPane.INFORMATION_MESSAGE);
@@ -284,7 +291,7 @@ public class Frontend extends JFrame {
         }
 
         // refresh table (with latest data)
-        displayRecipes();
+        displayRecipes(controller.getRecipes());
 
         // confirm delete
         JOptionPane.showMessageDialog(this, "Recipe deleted successfully!", "Delete Confirmation", JOptionPane.INFORMATION_MESSAGE);
