@@ -32,6 +32,7 @@ public class Frontend extends JFrame {
     private JTextArea recipeIngredientsField;
     private JTextArea recipeStepsField;
     private JTextArea recipeNotesField;
+    private boolean newRecipeClicked = false;
 
     public Frontend() {
         // get controller instance
@@ -97,6 +98,7 @@ public class Frontend extends JFrame {
         cookTimeLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         recipeForm.add(cookTimeLabel);
         recipeForm.add(recipeCookTimeField);
+
         JLabel ingredientsLabel = new JLabel("Ingredients:");
         ingredientsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         recipeForm.add(ingredientsLabel);
@@ -189,9 +191,11 @@ public class Frontend extends JFrame {
      * @param recipe the selected recipe
      */
     private void recipeSelected(Recipe recipe) {
+        // set newRecipeClicked to false
+        newRecipeClicked = false;
         // populate recipe form
-        recipeNameField.setText(recipe.getRecipeName());
-        recipeCookTimeField.setText(recipe.getTotalCookTime());
+        recipeNameField.setText(recipe.getName());
+        recipeCookTimeField.setText(recipe.getCookTime());
         recipeIngredientsField.setText(recipe.getIngredients());
         recipeStepsField.setText(recipe.getSteps());
         recipeNotesField.setText(recipe.getNotes());
@@ -211,6 +215,9 @@ public class Frontend extends JFrame {
     }
 
     private void newBtnClicked() {
+        // set newRecipeClicked to true
+        newRecipeClicked = true;
+
         // clear all fields in recipeForm
         recipeNameField.setText("");
         recipeCookTimeField.setText("");
@@ -219,19 +226,6 @@ public class Frontend extends JFrame {
         recipeNotesField.setText("");
         ratingLabel.setText("3");
 
-        // add new recipe to controller
-        try {
-            controller.addNewRecipe();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // update table
-        displayRecipes();
-
-        // select the last row (newly added recipe)
-        int lastRow = recipeList.getRowCount() - 1;
-        recipeList.setRowSelectionInterval(lastRow, lastRow);
     }
 
     private void saveBtnClicked() {
@@ -243,20 +237,37 @@ public class Frontend extends JFrame {
         String notes = recipeNotesField.getText();
         int rating = Integer.parseInt(ratingLabel.getText());
 
-        // get recipe id
-        int selectedRow = recipeList.getSelectedRow();
-        if (selectedRow == -1) {
-            System.out.println("No recipe selected to save");
+        // validate recipe
+        if(!controller.validateRecipe(name, ingredients, steps)){
+            JOptionPane.showMessageDialog(this, "Required Fields cannot be empty!", "Error", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        List<Recipe> recipes = ((RecipeTableModel) recipeList.getModel()).getRecipes();
-        int id = recipes.get(selectedRow).getId();
 
-        // update
-        try {
-            controller.updateRecipe(id, name, cookTime, ingredients, steps, notes, rating);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (newRecipeClicked) {
+            // add new recipe to controller
+            try {
+                controller.addNewRecipe(name, cookTime, ingredients, steps, notes, rating);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            newRecipeClicked = false;
+        }
+        else{
+            // get recipe id
+            int selectedRow = recipeList.getSelectedRow();
+            if (selectedRow == -1) {
+                System.out.println("No recipe selected to save");
+                return;
+            }
+            List<Recipe> recipes = ((RecipeTableModel) recipeList.getModel()).getRecipes();
+            int id = recipes.get(selectedRow).getId();
+
+            // update
+            try {
+                controller.updateRecipe(id, name, cookTime, ingredients, steps, notes, rating);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         // refresh table (with latest data)

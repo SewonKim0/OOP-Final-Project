@@ -26,8 +26,8 @@ public class RecipeBook {
     public void updateRecipe(int id, String name, String cookTime, String ingredients, String steps, String notes, int rating) {
         Recipe toUpdate = getRecipeById(id);
         if (toUpdate != null) {
-            toUpdate.setRecipeName(name);
-            toUpdate.setTotalCookTime(cookTime);
+            toUpdate.setName(name);
+            toUpdate.setCookTime(cookTime);
             toUpdate.setIngredients(ingredients);
             toUpdate.setSteps(steps);
             toUpdate.setNotes(notes);
@@ -59,7 +59,7 @@ public class RecipeBook {
     public ArrayList<Recipe> searchForRecipe(String query) {
         ArrayList<Recipe> result = new ArrayList<>();
         for (Recipe recipe : recipes) {
-            if (recipe.getRecipeName().toLowerCase().contains(query.toLowerCase()) ||
+            if (recipe.getName().toLowerCase().contains(query.toLowerCase()) ||
                 recipe.getIngredients().toLowerCase().contains(query.toLowerCase())) {
                 result.add(recipe);
             }
